@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Service Centre Finder</title>
+<link rel="stylesheet" href="styles.css"/>
+</head>
+<body>
+<div class="bg-blob blob1"></div>
+<div class="bg-blob blob2"></div>
+<div class="bg-blob blob3"></div>
+
+<div class="page">
+  <header>
+    <div class="logo">🔧</div>
+    <div>
+      <h1>Service Centre Finder</h1>
+      <p>216 centres &nbsp;·&nbsp; 21,770 pincodes</p>
+    </div>
+  </header>
+
+  <div class="container">
+    <div class="search-card">
+      <div class="search-card-title">Find a Service Centre</div>
+      <div class="tab-row">
+        <button class="tab-btn active" id="tab-pin"  onclick="switchTab('pin')">By Pincode</button>
+        <button class="tab-btn"        id="tab-name" onclick="switchTab('name')">By Centre Name</button>
+      </div>
+
+      <!-- Pincode -->
+      <div id="search-pin">
+        <div class="search-row">
+          <div class="search-input-wrap">
+            <svg width="15" height="15" fill="none" stroke="white" stroke-width="2" viewBox="0 0 24 24">
+              <path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/>
+            </svg>
+            <input type="text" id="pinInput" placeholder="Enter 6-digit pincode"
+                   maxlength="6" inputmode="numeric" pattern="[0-9]*"/>
+          </div>
+          <button class="search-btn" onclick="searchByPin()">Search</button>
+        </div>
+        <div class="hint">Enter a 6-digit pincode to find nearby service centres</div>
+      </div>
+
+      <!-- Name -->
+      <div id="search-name" style="display:none;">
+        <div class="search-row">
+          <div class="search-input-wrap" style="max-width:440px;">
+            <svg width="15" height="15" fill="none" stroke="white" stroke-width="2" viewBox="0 0 24 24">
+              <circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/>
+            </svg>
+            <input type="text" id="nameInput" placeholder="Type centre name, city or state…" oninput="searchByName()"/>
+          </div>
+        </div>
+        <div class="hint">Start typing to search across all 216 service centres</div>
+      </div>
+    </div>
+
+    <!-- Pincode results: table -->
+    <div class="results-section" id="pinResults">
+      <div class="results-header">
+        <div class="results-title">Search Results</div>
+        <div class="results-count" id="pinCount"></div>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Pin Code</th>
+              <th>Authorized Service Center</th>
+              <th>Model Category</th>
+              <th>Geography</th>
+            </tr>
+          </thead>
+          <tbody id="pinTableBody"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Name results: cards -->
+    <div class="name-results-section" id="nameResults">
+      <div class="results-header">
+        <div class="results-title">Service Centres</div>
+        <div class="results-count" id="nameCount"></div>
+      </div>
+      <div class="cards-grid" id="cardsGrid"></div>
+    </div>
+
+  </div>
+</div>
+
+<!-- Detail Modal -->
+<div class="modal-overlay" id="modalOverlay">
+  <div class="modal">
+    <div class="modal-head">
+      <div class="modal-avatar" id="mAvatar"></div>
+      <div class="modal-title">
+        <h3 id="mName"></h3>
+        <div class="sub" id="mSub"></div>
+      </div>
+      <button class="modal-close" onclick="closeModal()">×</button>
+    </div>
+    <div class="modal-body" id="mBody"></div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script src="data.js"></script>
+<script src="script.js"></script>
+</body>
+</html>
